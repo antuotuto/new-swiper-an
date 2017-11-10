@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" id="viewport" content="width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>王安安科技</title>
+    <link rel="icon" href="http://ooi407n8x.bkt.clouddn.com/an.jpg">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/boot.css">
+    <script>
+        ! function () {
+            var e = screen.width / 750;
+            document.getElementById("viewport").content = "width=750,initial-scale=" + e + ",minimum-scale=" + e +
+                ",maximum-scale=" + e + ",user-scalable=no"
+        }()
+    </script>
+</head>
+
+<body>
+    <div class="product"></div>
+
+
+</body>
+<script src="../scripts/jquery.min.js"></script>
+<script src="../scripts/data/data.js"></script>
+<script src="../scripts/data/list.js"></script>
+<script src="../scripts/main.js"></script>
+<script>
+    $(function () {
+        var Product = function (data, num) {
+            this.data = data;
+            this.dom = $('<div> </div>').addClass('item num-' + num);
+            this.num = num;
+            this.config = {
+                jqueryContainer: $('.product')
+            }
+            this.init();
+        };
+        Product.prototype = {
+            init: function () {
+                this.bindDOM();
+                this.bindEvent();
+            },
+            bindDOM: function () {
+                var str = ' <div class="image"> </div>'
+                str +=
+                    ' <img src="http://ooi407n8x.bkt.clouddn.com/an.jpg" alt="" class="product-img"> '
+                str += ' <p class="name"> @(name) </p>'
+                str += ' <p class="time"> @(time) </p>'
+                str += ' <div class="mark"> </div>'
+                str += ' </div>';
+                this.dom.html($$.formateString(str, this.data)).appendTo(this.config.jqueryContainer);
+            },
+            bindEvent: function () {
+                var that = this;
+                this.dom.on('mouseenter', function () {
+                    that.dom.addClass('an');
+                });
+                this.dom.on('mouseleave',
+                    function () {
+                        that.dom.removeClass('an');
+                    });
+                this.dom.on('click', function () {
+                    that.dom.toggleClass('yao');
+                });
+            }
+        };
+        for (var i = 0, len = list.length; i < len; i++) {
+            new Product(list[i], i);
+        }
+    })
+</script>
+
+</html>
